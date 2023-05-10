@@ -21,3 +21,38 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+export const getEmojis = async (productCategory,setCategoryEmojies)=>{
+    try {
+        const key = {
+          'apikey':"G9Gr8zJj1PfzTgLDRCu7LO4Wf2OZrfTQa5rXvfX0QDK1cZJl"
+        }
+        const tokenResult = await buyNGAxios.post("https://api.flaticon.com/v3/app/authentication",key,{
+          headers:{
+            'Content-Type':"multipart/form-data",
+            'Accept':"application/json"
+          }
+        })
+
+        const {token, expires} = tokenResult.data.data;
+
+        const iconResult = await buyNGAxios.get("https://api.flaticon.com/items/icons",{
+          headers:{
+            'Content-Type':"application/json",
+            'Authorization':token,
+          },
+          params:{
+            q:"clothings",
+            limits:"100"
+          }
+        })
+    } catch (error) {
+      console.log(error,"error")
+    }
+}
+
+// access-key : ee6da3defc5768917c004b8ba6ce54a5f24dee3d
+useEffect(()=>{
+      if (productCategory.length) {
+        getEmojis(productCategory,setCategoryEmojies);
+      }
+    },[productCategory.length])

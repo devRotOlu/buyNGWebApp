@@ -1,0 +1,82 @@
+
+.categoryLabelWrapper{
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.categoryLabel{
+    height: fit-content;
+    display: grid;
+    grid-template-columns: repeat(3,max-content);
+    column-gap: 10px;
+}
+
+.categoryWrapper{
+    padding: 0 2rem;
+    background-color:  rgb(245, 245, 250);
+    display: flex;
+    gap:1.5rem ;
+}
+
+.categoryLabel{
+    width: fit-content;
+}
+
+.categoryLabel span:first-child{
+    border-radius:20px;
+    color:grey;
+    background-color:white;
+    padding:0 0.5rem;
+}
+
+.categoryLabel span:last-child{
+    border-radius:20px; 
+    color:rgb(129, 129, 161);
+    background-color:white;
+    padding:0 0.5rem;
+}
+
+.productDetails > div{
+   box-sizing: border-box;
+    padding: 0.5rem 1rem; 
+    background-color: white;
+}
+
+.productDetails > div:last-child{
+    border-radius: 5px;
+}
+
+.productDetails{
+    display: grid;
+    grid-template-columns: 100%;
+    row-gap: 15px;
+}
+
+.productGallery{
+    display: grid;
+    grid-template-columns: repeat(3,32%);
+    grid-auto-rows: max-content;
+    justify-content: space-between;
+}
+
+.cardInfo{
+    background-color:white;
+    display:none;
+    flex-direction:column;
+    padding:7px .5rem;
+    border-bottom-left-radius:inherit;
+    border-bottom-right-radius:inherit;
+    gap:7px;
+}
+
+.instructions.cardDetails{
+    font-size:14px;
+    font-weight: lighter;
+}
+
+.productLocationWrapper{
+    display: grid;
+    grid-template-columns: repeat(3,max-content);
+    overflow-y: scroll;
+}

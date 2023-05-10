@@ -1,0 +1,31 @@
+.categoriesWrapper{
+    list-style: none;
+    background-color: white;
+    border-radius: 5px;
+    width: fit-content;
+    margin-left: 10px;
+    padding-left: 0;
+}
+
+.home{
+    padding: 30px 0;
+}
+
+.categories{
+    padding: 8px 1em;
+    width: 100%;
+    cursor: pointer;
+}
+
+.categories a{
+    text-decoration: none;
+    color: black;
+}
+
+.categories:hover a {
+    color: orangered;
+}
+
+.home{
+    background-color:  rgb(245, 245, 250);;
+}

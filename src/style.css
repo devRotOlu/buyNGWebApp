@@ -1,0 +1,146 @@
+ *{
+     padding: 0;
+     margin: 0;
+     font-family: Arial, Helvetica, sans-serif;
+     box-sizing: border-box;
+ }
+
+ a{
+     text-decoration: none;
+ }
+
+ li{
+     list-style: none;
+ }
+
+ .accountTab{
+     display: flex;
+     gap: 0.5rem;
+     align-items: center;
+ }
+
+ .accountTab:hover{
+    color: orangered;
+ }
+
+ .accountTab:focus{
+    background-color: rgb(233, 227, 227);
+    border-radius: 5px;
+    color: black;
+ }
+
+ .signInLink{
+    border-bottom: solid rgb(226, 226, 226) 2.5px;
+    padding: 16px 1rem;
+ }
+
+ .links{
+     display: block;
+ }
+
+ .signIn{
+    background-color: orange;
+    display: block;
+    border-radius: 5px;
+    box-shadow:2px 2px grey;
+    text-align:center;
+    font-weight:bold;
+    padding: 10px 0;
+ }
+
+ .signIn:hover{
+    background-color: rgb(238, 159, 24);
+ }
+
+ .userLinks{
+     padding: 0.5rem;
+     cursor: pointer;
+     display: flex;
+     gap: 1rem;
+     align-items: center;
+ }
+
+ .userLinks:hover{
+    background-color: rgb(233, 227, 227);
+    font-weight: bold;
+ }
+
+ .userLinks>a{
+    color: black;
+    font-size: 15px;
+ }
+
+.logOutLink{
+    display: flex;
+    justify-content: center;
+    border-top: solid rgb(226, 226, 226) 2.5px;
+    padding: 8px 0;
+ }
+ 
+
+.logOutLink a{
+    color: orange;
+    padding: 0.5rem;  
+    font-weight: bold; 
+}
+
+.logOutLink a:hover{
+  background-color: rgb(226, 207, 199);
+  border-radius: 5px;
+}
+
+ .accountTab:focus > .angleUp{
+    display: inline;
+ }
+
+ .accountTab:focus > .angleDown{
+    display: none;
+ }
+
+ .angleUp{
+     display: none;
+ }
+
+ .userProfile{
+    font-weight:bold;
+    display:flex;
+    gap:0.5rem;
+    align-items:center
+ }
+
+ .componentWrappers{
+   padding: 0 3rem;
+ }
+
+ .navbarWrapper{
+    align-items: center;
+ }
+
+ .accessWrapper{
+    justify-content: space-around;
+    align-items: center;
+ }
+
+ .offcanvasWrapper{
+   display:flex;
+   align-items:center;
+   justify-content:center;
+   width:100%;
+   height:100%;
+   background-color:  rgb(190, 185, 185);
+ }
+
+ .searchBar{
+   display: block;
+   outline: none;
+   border-radius: 5px;
+   border: none;
+   height:100%;
+   width:100%
+}
+
+.searchBar::placeholder{
+   color: rgb(133, 132, 132);
+   font-size: 14px;
+   font-weight: normal;
+}

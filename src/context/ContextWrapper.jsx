@@ -105,6 +105,10 @@ const ContextWrapper = (props) => {
       }
     },[states.length])
 
+    const focusCanvas = ()=>{
+      document.getElementById("canvas").focus();
+    }
+
 
     const styleValidationForm = (userDetailInput,labelSpan)=>{
 
@@ -134,7 +138,7 @@ const ContextWrapper = (props) => {
     const displayEditButton = disableEmail?"block":"none";
     
   return (
-    <appContext.Provider value={{isSignedIn,userDetails,setUserDetails,disableEmail,setDisableEmail, setIsSignedIn, displayEditButton, styleValidationForm,cookie,setCookie,removeCokie,addUserInfoToCookie, productCategory,setProductCategory,productObject, setProductObject,states,regions, selectedCategory, setSelectedCategory}}>
+    <appContext.Provider value={{isSignedIn,userDetails,setUserDetails,disableEmail,setDisableEmail, setIsSignedIn, displayEditButton, styleValidationForm,cookie,setCookie,removeCokie,addUserInfoToCookie, productCategory,setProductCategory,productObject, setProductObject,states,regions, selectedCategory, setSelectedCategory,focusCanvas}}>
       {props.children}
     </appContext.Provider>
   )

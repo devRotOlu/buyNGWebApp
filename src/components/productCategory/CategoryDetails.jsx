@@ -2,7 +2,12 @@ import React from 'react';
 
 import LocationIndicator from './LocationIndicator';
 
-const CategoryDetails = ({name}) => {
+const CategoryDetails = (props) => {
+    
+    const {
+            name,selectedLocation,
+            setSelectedState
+        } = props.propsObject
   return (
     <div style={{width:"100%"}}>      
         <div style={{padding:"0.5rem 1rem",backgroundColor:"green",borderRadius:"5px 5px 0 0"}}>
@@ -17,7 +22,7 @@ const CategoryDetails = ({name}) => {
                 </span>
             </div>
             <div>
-                 <LocationIndicator categoryName={name}/>
+                 <LocationIndicator propsObject={{categoryName:name,selectedLocation,setSelectedState}}/>
             </div>
         </div>
     </div>

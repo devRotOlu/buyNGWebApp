@@ -3,16 +3,21 @@ import React,{useEffect,useRef} from 'react';
 import DropDownTrigger from '../DropDownTrigger';
 
 const ProductLocation = (props) => {
-
+  
   const {
           location, productLocation,
           locationIndentifier,gridRows,
           locationArray,index,
-          setSelectedState,selectedState
+          setSelectedState,selectedState,
+          setSelectedLocation,previousRegion,
+          previousState
         } = props.propsObject;
 
   const divRef = useRef();
-  const spanRef = useRef();
+
+  const isPreviousLocation = location.name === previousState || location.name === previousRegion;
+
+  const color = isPreviousLocation? "rgb(11, 206, 11)": "";
 
   useEffect(()=>{
     if (gridRows && locationArray.length) {
@@ -26,12 +31,20 @@ const ProductLocation = (props) => {
   },[gridRows,locationArray.length])
 
   const handleClick = ()=>{
+    const _selectedLocation = location.name
+    console.log(_selectedLocation,"selectedLocation");
     if (!selectedState) {
-      const state = spanRef.current.innerHTML;
-      setSelectedState(state.replace(" State",""));
+      setSelectedState(_selectedLocation);
     }
     else{
-
+      const isState = _selectedLocation.includes(selectedState)
+      if (!isState) {
+        setSelectedLocation(`${selectedState},${_selectedLocation}`);
+      }
+      else{
+        setSelectedLocation(_selectedLocation);
+      }
+      document.getElementById("canvas").focus();
     }
   }
 
@@ -42,9 +55,9 @@ const ProductLocation = (props) => {
         </span>
         <div onClick={handleClick} className="locationWrapper" ref={divRef}>
           <span>
-             <span ref={spanRef} className="location">
+             <span className="location" style={{color}}>
                 {
-                  `${location.name} ${selectedState? "":"State"}  `
+                  `${location.name} ${selectedState? "":" State"}  `
                 }
              </span>
               <span style={{color:"rgb(133, 132, 132)"}}>

@@ -70,3 +70,18 @@ export const styleListWrapper= (name, listRef, selectedState, location)=>
     }
   }
 }
+
+export const commaSeparatePrice= (price)=>{
+  const _price = String(price);
+  if (_price.length > 3) {
+      return _price.split("").reverse().map((digit,index)=>{
+          var digitIndex = index + 1;
+          const isMultiple = digitIndex % 3 === 0
+          if (isMultiple && digitIndex !== _price.length) {
+              return `,${digit}`; 
+          }
+          return digit;
+      }).reverse().join("")
+  }
+  return _price;
+}

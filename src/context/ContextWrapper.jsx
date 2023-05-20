@@ -46,6 +46,8 @@ const ContextWrapper = (props) => {
 
     const [selectedCategory, setSelectedCategory] = useState("");
 
+    const [isCanvasInView,setIsCanvasInView] = useState(false);
+
     const authenticateUser = (data)=>{
       if (data) {
         const {email,phoneNumber,firstName,lastName,id} = data
@@ -105,8 +107,10 @@ const ContextWrapper = (props) => {
       }
     },[states.length])
 
-    const focusCanvas = ()=>{
-      document.getElementById("canvas").focus();
+    const moveCanvasOffView = ()=>{
+      const canvas = document.getElementById("canvas");
+      canvas.setAttribute("aria-checked","false");
+      setIsCanvasInView(false);
     }
 
 
@@ -138,7 +142,7 @@ const ContextWrapper = (props) => {
     const displayEditButton = disableEmail?"block":"none";
     
   return (
-    <appContext.Provider value={{isSignedIn,userDetails,setUserDetails,disableEmail,setDisableEmail, setIsSignedIn, displayEditButton, styleValidationForm,cookie,setCookie,removeCokie,addUserInfoToCookie, productCategory,setProductCategory,productObject, setProductObject,states,regions, selectedCategory, setSelectedCategory,focusCanvas}}>
+    <appContext.Provider value={{isSignedIn,userDetails,setUserDetails,disableEmail,setDisableEmail, setIsSignedIn, displayEditButton, styleValidationForm,cookie,setCookie,removeCokie,addUserInfoToCookie, productCategory,setProductCategory,productObject, setProductObject,states,regions, selectedCategory, setSelectedCategory,moveCanvasOffView,isCanvasInView,setIsCanvasInView}}>
       {props.children}
     </appContext.Provider>
   )

@@ -5,9 +5,10 @@ import LocationIndicator from './LocationIndicator';
 const CategoryDetails = (props) => {
     
     const {
-            name,selectedLocation,
-            setSelectedState
+            name,setSelectedState,
+            selectedLocation,getRequiredSelectedLocation
         } = props.propsObject
+
   return (
     <div style={{width:"100%"}}>      
         <div style={{padding:"0.5rem 1rem",backgroundColor:"green",borderRadius:"5px 5px 0 0"}}>
@@ -20,9 +21,9 @@ const CategoryDetails = (props) => {
                 <span>
                     {name}
                 </span>
-            </div>
+            </div> 
             <div>
-                 <LocationIndicator propsObject={{categoryName:name,selectedLocation,setSelectedState}}/>
+                 <LocationIndicator propsObject={{categoryName:name,selectedLocation,setSelectedState,getRequiredSelectedLocation}}/>
             </div>
         </div>
     </div>

@@ -55,19 +55,25 @@
 
 .productGallery{
     display: grid;
-    grid-template-columns: repeat(3,32%);
-    grid-auto-rows: max-content;
     justify-content: space-between;
 }
 
 .cardInfo{
     background-color:white;
     display:none;
-    flex-direction:column;
-    padding:7px .5rem;
     border-bottom-left-radius:inherit;
     border-bottom-right-radius:inherit;
     gap:7px;
+}
+
+
+.flexColumn{
+    gap: 7px;
+    flex-direction: column;
+}
+
+.flexRow{
+    flex-direction: row;
 }
 
 .instructions.cardDetails{
@@ -88,7 +94,7 @@
     grid-auto-flow:column;
     overflow-y: scroll;
     display: grid;
-    flex-grow:1;
+    max-height: 100%;
 }
 
 .locationWrapper{
@@ -123,19 +129,21 @@
     top: 0;
     z-index: 100000;
     display: flex;
-    transition: right 2ms,
+    transition: right 0.1s,
 }
 
-.canvas:focus{
-    animation: translateOffView 0.1s forwards;
+.canvas[aria-checked="true"]{
+    right: 0;
+    transition-duration:2ms;
 }
 
-@keyframes translateOffView {
-    from{
-        right: 0;
-    }
-    to{
-        right: -100vw;
-    }
+.imageTopRadius{
+    border-top-left-radius:inherit;
+    border-top-right-radius:inherit
+}
+
+.imageLeftRadius{
+    border-top-left-radius:inherit;
+    border-bottom-left-radius: inherit;
 }
 

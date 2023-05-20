@@ -1,4 +1,6 @@
-import React,{useRef,useEffect} from 'react'
+import React,{useContext} from 'react';
+
+import { appContext } from '../../context/ContextWrapper';
 
 const OffCanvas = (props) => {
 
@@ -7,16 +9,27 @@ const OffCanvas = (props) => {
           bodyWidth,bodyHeight
         } = props;
 
-  const handleFocus = (event)=>{
+  const appSates = useContext(appContext);
+
+  const {moveCanvasOffView,isCanvasInView} = appSates;
+
+  const handleClick = (event)=>{
     event.preventDefault();
     event.stopPropagation();
   }
 
+  const handleCanvasClick = (event)=>{
+    moveCanvasOffView();
+  }
+
   return (
-    <div tabIndex="0" className="canvas" id="canvas" style={{alignItems,justifyContent}}>
-       <div onFocus={handleFocus} tabIndex="0" style={{height:bodyHeight,width:bodyWidth,display:"grid",gridTemplateColumns:"100%",gridTemplateRows:"100%"}}>
+    <div onClick={handleCanvasClick} aria-checked="false" role="checkbox" className="canvas" id="canvas" style={{alignItems,justifyContent}}>
+       <div onClick={handleClick} tabIndex="0" style={{height:bodyHeight,width:bodyWidth,display:"grid",gridTemplateColumns:"100%",gridTemplateRows:"100%"}}>
           {
+            (isCanvasInView)?
             props.children
+            :
+            ""
           }
         </div>
     </div>
@@ -24,15 +37,3 @@ const OffCanvas = (props) => {
 }
 
 export default OffCanvas
-
-{/* <div ref={divRef} className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
-      <div className="offcanvas-body" style={{backgroundColor:"inherit"}}>
-        <div  onClick={handleChildClick}  className="offcanvasWrapper" data-bs-dismiss="offcanvas" style={{alignItems,justifyContent}}>
-            <div  onClick={handleClick} style={{height:bodyHeight,width:bodyWidth,display:"grid",gridTemplateColumns:"100%",gridTemplateRows:"100%"}}>
-              {
-                props.children
-              }
-            </div>
-        </div>
-      </div>
-</div> */}

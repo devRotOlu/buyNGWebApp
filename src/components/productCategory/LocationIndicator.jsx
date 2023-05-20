@@ -8,8 +8,8 @@ import { appContext } from '../../context/ContextWrapper';
 const LocationIndicator = (props) => {
 
   const {
-          categoryName,selectedLocation,
-          setSelectedState
+          categoryName,getRequiredSelectedLocation,
+          selectedLocation,setSelectedState
         } = props.propsObject;
 
   const appStates = useContext(appContext);
@@ -17,7 +17,6 @@ const LocationIndicator = (props) => {
   const {setSelectedCategory} = appStates;
 
   const handleClick = ()=>{
-    console.log("triggering canvas")
     setSelectedState("");
     setSelectedCategory(categoryName)
   };
@@ -25,15 +24,9 @@ const LocationIndicator = (props) => {
   let _location = "";
 
   if (selectedLocation) {
-      if (selectedLocation.includes(",")) {
-        _location = selectedLocation.split(",")[1];
-      }
-      else{
-        _location = selectedLocation;
-      }
+    _location = getRequiredSelectedLocation(selectedLocation);
   }
 
-  console.log(_location,"location");
   
   return (
     <CanvassTrigger handleClick={handleClick}>

@@ -25,10 +25,6 @@ const Home = () => {
 
   const handleSearch = (event)=> setSearchTerm(event.target.value);
 
-  useEffect(()=>{
-    console.log(searchTerm,"searchTerm")
-  },[searchTerm])
-
   return (
     <div className="home ">
     

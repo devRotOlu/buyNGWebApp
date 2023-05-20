@@ -1,13 +1,12 @@
 import React,{useContext,useEffect,useState,useRef} from 'react';
 
 import ProductLocation from './ProductLocation';
-import OffCanvas from './OffCanvas';
 import SearchBar from "../SearchBar";
 
 import { appContext } from '../../context/ContextWrapper';
 import {removeExtraSpaces} from '../../helperFunctions/helperFunctions';
 
-const readProductLocations = (locationArray,regions,category,gridRows,setSelectedState,selectedState,setSelectedLocation,previousRegion,previousState)=>{
+const readProductLocations = (locationArray,regions,category,gridRows,setSelectedState,selectedState,setSelectedLocation,previousRegion,previousState,setSearchTerm,searchTerm)=>{
 
     const areValid = regions.length && category;
 
@@ -30,7 +29,7 @@ const readProductLocations = (locationArray,regions,category,gridRows,setSelecte
             const locationFirstLetter = location.name[0];
             const firstIndex = locationArray.findIndex(location=> location.name[0] === locationFirstLetter);
             const locationIndentifier = (firstIndex === index)? locationFirstLetter : undefined;
-            return <ProductLocation propsObject={{location,productLocation,gridRows,locationIndentifier,locationArray,index,setSelectedState,selectedState,setSelectedLocation,previousRegion,previousState}} key={location.id} />
+            return <ProductLocation propsObject={{location,productLocation,gridRows,locationIndentifier,locationArray,index,setSelectedState,selectedState,setSelectedLocation,previousRegion,previousState,setSearchTerm,searchTerm}} key={location.id} />
         });
     }
 }
@@ -74,7 +73,8 @@ const CategoryLocations = (props) => {
 
     const {
         states, regions,
-        selectedCategory,productCategory
+        selectedCategory,productCategory,
+        moveCanvasOffView
     } = appSates;
 
     const {
@@ -94,12 +94,13 @@ const CategoryLocations = (props) => {
 
     let locationArray = states;
 
-    if (selectedState) {
-        const selectedStateIndex = states.findIndex(state=> selectedState.includes(state.name));
-        locationArray = regions[selectedStateIndex];
+    if (searchTerm) {
+        locationArray = selectedState? findStateRegions(states,regions,selectedState) : states;
+        locationArray = locationArray.filter(location=> location.name.toLowerCase().includes(searchTerm.toLowerCase()));
     }
-
-    console.log(locationArray,"locationArray");
+    else if(selectedState){
+        locationArray = findStateRegions(states,regions,selectedState);
+    }
 
     const _gridRows = Math.ceil(locationArray.length/3);
     const _rowsTemplate = `repeat(${_gridRows},50px)`;
@@ -116,48 +117,51 @@ const CategoryLocations = (props) => {
             const locationArray = selectedLocation.split(",")
             previousRegion.current = removeExtraSpaces(locationArray[1]);
             previousState.current = removeExtraSpaces(locationArray[0]);
-            selectedLocation("");
+            setSelectedLocation("");
         }
     },[])
 
     const handleClick = ()=>{
         if (selectedState) {
-            setSelectedState("");    
-        }
-        else{
-            document.getElementById("canvas").focus();
+            setSelectedState("");
+        }else{
+            moveCanvasOffView()
         }
     }
-
     
   return ( 
-    <OffCanvas alignItems="center" justifyContent="center" bodyWidth="70%"
-    bodyHeight="80%">
-            <div className="productLocationWrapper">
-                <div style={{display:"grid",padding:"20px 50px 20px 0",alignItems:"center",gridTemplateColumns:"repeat(3,1fr)",width:"100%",lineHeight:"40px"}}>
-                        <div onClick={handleClick} style={{paddingLeft:"30px", display:"flex",alignItems:"center"}}>
-                            <span> 
-                                {
-                                    readCategoryHeader(selectedState,category)
-                                }
-                            </span>                       
-                        </div>
-                        <div></div>
-                        <div style={{paddingLeft:"30px"}}>
-                            <div>
-                             <SearchBar propsObject={{height:"40px", width:"100%",placeholder:"Find state, city or district",handleSearch,searchTerm,searchButtonColor:"rgb(133, 132, 132)",borderRadius: "5px",searchButtonPosition:"left",placeholderMargin:"10px",searchButtonMargin:"10px"}}/> 
-                            </div>
-                        </div>
+        <div className="productLocationWrapper">
+            <div style={{display:"grid",padding:"20px 50px 20px 0",alignItems:"center",gridTemplateColumns:"repeat(3,1fr)",width:"100%",lineHeight:"40px"}}>
+                <div onClick={handleClick} style={{paddingLeft:"30px", display:"flex",alignItems:"center"}}>
+                    <span> 
+                        {
+                            readCategoryHeader(selectedState,category)
+                        }
+                    </span>                       
                 </div>
-                <div className="productLocationContainer" style={{gridTemplateRows:_rowsTemplate}}>
+                <div></div>
+                <div style={{paddingLeft:"30px"}}>
+                    <div>
+                        <SearchBar propsObject={{height:"40px", width:"100%",placeholder:"Find state, city or district",handleSearch,searchTerm,searchButtonColor:"rgb(133, 132, 132)",borderRadius: "5px",searchButtonPosition:"left",placeholderMargin:"10px",searchButtonMargin:"10px"}}/> 
+                    </div>
+                </div>
+            </div>
+            <div style={{flexGrow:"1",borderBottomLeftRadius:"inherit",borderBottomRightRadius:"inherit",overflowY:"hidden"}}>
+                <div className="productLocationContainer" style={{gridTemplateRows:_rowsTemplate,borderBottomLeftRadius:"inherit",borderBottomRightRadius:"inherit"}}>
                     {
-                        readProductLocations(locationArray,regions,category,_gridRows,setSelectedState,selectedState,setSelectedLocation,previousRegion,previousState)
+                        readProductLocations(locationArray,regions,category,_gridRows,setSelectedState,selectedState,setSelectedLocation,previousRegion.current,previousState.current,setSearchTerm,searchTerm)
                     }
                 </div>
             </div>
-    </OffCanvas>    
-  )
+        </div>   
+    )
+
 }
 
 export default CategoryLocations;
 
+const findStateRegions = (states,regions,selectedState)=>
+ {
+    const selectedStateIndex = states.findIndex(state => selectedState.includes(state.name));
+    return regions[selectedStateIndex];
+}

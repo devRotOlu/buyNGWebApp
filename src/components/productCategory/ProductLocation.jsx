@@ -1,6 +1,9 @@
-import React,{useEffect,useRef} from 'react';
+import React,{useEffect,useRef,useContext} from 'react';
 
 import DropDownTrigger from '../DropDownTrigger';
+
+import { appContext } from '../../context/ContextWrapper';
+
 
 const ProductLocation = (props) => {
   
@@ -10,14 +13,19 @@ const ProductLocation = (props) => {
           locationArray,index,
           setSelectedState,selectedState,
           setSelectedLocation,previousRegion,
-          previousState
+          previousState,setSearchTerm,
+          searchTerm
         } = props.propsObject;
+
+        const appStates = useContext(appContext);
+        const {moveCanvasOffView} = appStates;
 
   const divRef = useRef();
 
   const isPreviousLocation = location.name === previousState || location.name === previousRegion;
 
   const color = isPreviousLocation? "rgb(11, 206, 11)": "";
+  const fontWeight = isPreviousLocation? "bold" :"";
 
   useEffect(()=>{
     if (gridRows && locationArray.length) {
@@ -32,7 +40,11 @@ const ProductLocation = (props) => {
 
   const handleClick = ()=>{
     const _selectedLocation = location.name
-    console.log(_selectedLocation,"selectedLocation");
+    
+    if (searchTerm) {
+      setSearchTerm("");
+    }
+
     if (!selectedState) {
       setSelectedState(_selectedLocation);
     }
@@ -44,7 +56,7 @@ const ProductLocation = (props) => {
       else{
         setSelectedLocation(_selectedLocation);
       }
-      document.getElementById("canvas").focus();
+      moveCanvasOffView();
     }
   }
 
@@ -55,11 +67,11 @@ const ProductLocation = (props) => {
         </span>
         <div onClick={handleClick} className="locationWrapper" ref={divRef}>
           <span>
-             <span className="location" style={{color}}>
+              <span className="location" style={{color,fontWeight}}>
                 {
                   `${location.name} ${selectedState? "":" State"}  `
                 }
-             </span>
+              </span>
               <span style={{color:"rgb(133, 132, 132)"}}>
                 <span style={{fontSize:"18px",fontWeight:"bold"}}>
                   &#x002E; 

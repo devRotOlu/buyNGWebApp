@@ -20,7 +20,6 @@ const Image = (props) => {
 
         const images = productObject.imageFiles.filter((image,index)=> index !== imageIndex);
 
-        console.log(images,"images")
 
         setProductObject({...productObject,imageFiles:images});
     }

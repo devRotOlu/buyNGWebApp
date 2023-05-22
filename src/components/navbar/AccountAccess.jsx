@@ -13,14 +13,16 @@ const AccountAccess = () => {
     const appStates = useContext(appContext);
     const {
         isSignedIn,setIsSignedIn,
-        userDetails,removeCookie,
+        userDetails,removeCokie
     } = appStates
 
     const currentLocation = useLocation();
     const {pathname} = currentLocation;
 
-    const handleLogOut= ()=>{
-        removeCookie("userDetails");
+    const handleLogOut= (event)=>{
+        event.preventDefault();
+        console.log("handling logout")
+        removeCokie("userDetails");
         setIsSignedIn(false);
     }
 

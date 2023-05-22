@@ -1,6 +1,6 @@
 import React,{useContext} from 'react';
 
-import DropDownTrigger from '../DropDownTrigger';
+import DropDownIndicator from '../DropDownIndicator';
 import CanvassTrigger from './CanvassTrigger';
 
 import { appContext } from '../../context/ContextWrapper';
@@ -38,9 +38,9 @@ const LocationIndicator = (props) => {
           selectedLocation? _location: "All Nigeria"
         }
       </span>
-      <DropDownTrigger dropEnd="dropend">
+      <DropDownIndicator dropEnd="dropend">
         <p className="dropdown-toggle dropdown-toggle-split p-0 mt-0"/>
-      </DropDownTrigger>
+      </DropDownIndicator>
     </CanvassTrigger>
   )
 }

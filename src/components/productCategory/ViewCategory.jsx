@@ -1,7 +1,7 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect,useRef} from 'react';
 import { useLocation } from 'react-router-dom';
 
-import CategoryProducts from './CategoryProducts';
+import CategoryProducts from './categoryProducts/CategoryProducts';
 import CategoryHeader from './CategoryHeader';
 import CategoryDetails from './CategoryDetails';
 import CategoryLocations from './CategoryLocations';
@@ -14,6 +14,9 @@ const ViewCategory = () => {
   const {id,name,products} = category;
   const [selectedLocation,setSelectedLocation] = useState("");
   const [selectedState, setSelectedState] = useState("");
+  
+  // 0 means don't sort. 1 indicates sort by lowest and 2 indicates sort by highest.
+  const [sortProductsBy,setSortProductsBy] = useState(0);
 
   const getRequiredSelectedLocation = (selectedLocation)=>{
     if (selectedLocation.includes(",")) {
@@ -24,11 +27,19 @@ const ViewCategory = () => {
     }
   }
 
-  var _categroryProducts = products;
+  var _categroryProducts = [...products];
 
   if (selectedLocation) {
     const _selectedLocation = getRequiredSelectedLocation(selectedLocation);
     _categroryProducts = products.filter(product=>product.location.includes(_selectedLocation));
+  }
+
+  if (sortProductsBy) {
+    if (sortProductsBy === 1) {
+      _categroryProducts.sort((a,b)=> a.price - b.price);
+    }else{
+      _categroryProducts.sort((a,b)=> b.price - a.price);
+    }
   }
 
   return (
@@ -38,7 +49,7 @@ const ViewCategory = () => {
           <CategoryHeader length={_categroryProducts.length} name={name}/>
           <CategoryDetails propsObject={{name,setSelectedState,selectedLocation,getRequiredSelectedLocation}}/>
         </div>
-        <CategoryProducts name={name} products={_categroryProducts}/>
+        <CategoryProducts propsObject={{name,products:_categroryProducts,setSortProductsBy,sortProductsBy}}/>
       </div>
       <OffCanvas alignItems="center" justifyContent="center" bodyWidth="70%"
     bodyHeight="80%">

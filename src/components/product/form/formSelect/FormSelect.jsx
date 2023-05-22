@@ -66,6 +66,7 @@ const FormSelect = (props) => {
   const handleOptionSearch = (event)=> setSearchTerm(event.target.value);
 
   const handleDocumentClick = (event)=>{
+    console.log("in here")
     const target = event.target;
     if (target.classList.contains("clearForm")) {
       setSelectedState("");

@@ -13,17 +13,17 @@
      list-style: none;
  }
 
- .accountTab{
+ .dropDownTrigger.accountTab{
      display: flex;
      gap: 0.5rem;
      align-items: center;
  }
 
- .accountTab:hover{
+ .dropDownTrigger.accountTab:hover{
     color: orangered;
  }
 
- .accountTab:focus{
+ .dropDownTrigger.accountTab:focus{
     background-color: rgb(233, 227, 227);
     border-radius: 5px;
     color: black;
@@ -89,11 +89,11 @@
   border-radius: 5px;
 }
 
- .accountTab:focus > .angleUp{
+.dropDownTrigger.accountTab:focus > .angleUp{
     display: inline;
  }
 
- .accountTab:focus > .angleDown{
+ .dropDownTrigger.accountTab:focus > .angleDown{
     display: none;
  }
 
@@ -134,4 +134,20 @@
    color: rgb(133, 132, 132);
    font-size: 14px;
    font-weight: normal;
+}
+
+.dropDownTrigger{
+   color: black;
+}
+
+.dropDownTrigger:visited{
+   color: black;
+}
+
+.dropDownTrigger:hover{
+   color: black;
+}
+
+.dropDownTrigger:active{
+   color: black;
 }

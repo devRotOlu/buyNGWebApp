@@ -1,14 +1,14 @@
 import React from 'react'
 
 const DropDownTrigger = (props) => {
-  const {focusInput,dropEnd,paddingRight} = props;
+    const {triggerClass, styleObject} = props;
   return (
-    <div className={`${dropEnd}`} onClick={focusInput} aria-expanded="false" style={{position:"absolute",top:"0",width:"100%",height:"100%",display:"flex",justifyContent:"right",alignItems:"center",paddingRight, cursor:"pointer"}}>
+    <a style={styleObject} className={`dropDownTrigger ${triggerClass}`} href="#" data-bs-toggle="dropdown" aria-expanded="false">
         {
-          props.children
+            props.children
         }
-    </div> 
+    </a>
   )
 }
 
-export default DropDownTrigger;
+export default DropDownTrigger

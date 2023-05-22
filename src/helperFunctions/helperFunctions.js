@@ -85,3 +85,25 @@ export const commaSeparatePrice= (price)=>{
   }
   return _price;
 }
+
+export const getPortraitHeight = (productCard,marginBottom,rowHeight)=>{
+  let targetHeight = getComputedStyle(productCard).height;
+      targetHeight = Number(targetHeight.replace("px",""));
+      const remainder = targetHeight%rowHeight;
+  const _marginBottom = marginBottom - (rowHeight - remainder);
+  return Math.ceil((targetHeight/rowHeight) + (_marginBottom/rowHeight));
+}
+
+export const getGridRowStart=(isPortrait,products,productIndex,parent,gridColumnStart,columnCount)=>{  
+  let preCardColumnIndex= products.findIndex((product,index)=>{ 
+    const columnStart = isPortrait? (index + 1)%columnCount || columnCount : columnCount;
+    const isColumnMate = isPortrait? (productIndex - index) === columnCount : (productIndex - index) === 1;
+    return (index < productIndex) && (columnStart === gridColumnStart) && isColumnMate ; 
+  })
+  if (preCardColumnIndex >= 0) {
+    const preColumnCard = parent.children[preCardColumnIndex];
+    return Number(getComputedStyle(preColumnCard).gridRowEnd); 
+  }else{
+    return 1;
+  }
+}

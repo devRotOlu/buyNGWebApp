@@ -1,9 +1,7 @@
-import React,{useState, useEffect,useContext, useRef} from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAngleLeft} from "@fortawesome/free-solid-svg-icons";
+import React,{useState, useEffect,useContext} from 'react';
 
 import SelectOptions from './SelectOptions';
-import DropDownTrigger from "../../../DropDownTrigger"; 
+import DropDownIndicator from "../../../DropDownIndicator"; 
 import SelectList from './SelectList';
 
 import { appContext } from '../../../../context/ContextWrapper';
@@ -124,9 +122,9 @@ const DropDown = React.forwardRef((props,ref)=> {
 
   return (
     <div> 
-        <DropDownTrigger focusInput={focusInput} paddingRight="15px">
-          <p className="dropdown-toggle dropDownToggle"  style={{marginLeft:"auto"}}/>
-        </DropDownTrigger>
+        <DropDownIndicator handleIndicatorClick={focusInput} paddingRight="15px">
+          <p className="dropdown-toggle"  style={{marginLeft:"auto"}}/> 
+        </DropDownIndicator>
         <SelectList propsObject={{handleListClick,removeSelectedState,listRef:ref,
             selectedState}}>
               {

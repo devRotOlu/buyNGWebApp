@@ -8,9 +8,9 @@ const SelectList = (props) => {
             handleListClick,removeSelectedState,
             listRef,selectedState
         } = props.propsObject;
-
+    
   return (
-    <ul onClick={handleListClick} ref={listRef} className="dropdown-menu listWrapper" style={{width:"100%", maxHeight:"300px", overflow:"scroll", padding:"0"}}>
+    <ul onClick={handleListClick} ref={listRef} className="dropdown-menu" style={{width:"100%", maxHeight:"300px", overflow:"scroll", padding:"0"}}>
         {
             (selectedState)?
             <span className="listHeader" >

@@ -1,6 +1,6 @@
 import React,{useEffect,useRef,useContext} from 'react';
 
-import DropDownTrigger from '../DropDownTrigger';
+import DropDownIndicator from '../DropDownIndicator';
 
 import { appContext } from '../../context/ContextWrapper';
 
@@ -80,9 +80,9 @@ const ProductLocation = (props) => {
               </span>
           </span>
           
-          <DropDownTrigger paddingRight="2rem">
+          <DropDownIndicator paddingRight="2rem">
             <i className="bi bi-chevron-right"/>
-          </DropDownTrigger>
+          </DropDownIndicator>
         </div>
     </div>
   )

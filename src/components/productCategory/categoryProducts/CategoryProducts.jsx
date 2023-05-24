@@ -1,7 +1,7 @@
 import React,{useRef,useState} from 'react';
 
 import ProductLayoutToggle from './ProductLayoutToggle';
-import ProductCardLayout from '../ProductCardLayout';
+import ProductCardWrapper from '../ProductCardWrapper';
 import ProductSorter from './ProductSorter';
 
 const CategoryProducts = (props) => {
@@ -13,8 +13,6 @@ const CategoryProducts = (props) => {
 
     const _sortProductsBy = !sortProductsBy? " Recommended":(sortProductsBy === 1)? " Lowest price" : " Highest price";
 
-    const productGalleryRef = useRef();
-
     const [isPortrait,setIsPortrait] = useState(true);
 
     const columnCount = isPortrait? 3 : 1;
@@ -22,7 +20,6 @@ const CategoryProducts = (props) => {
     const landScapeBgColor = isPortrait? "grey":"rgb(11, 206, 11)";
 
     const gridTemplateColumns = isPortrait? `repeat(${columnCount},32%)` :"100%";
-    const rowHeight = 2 ;
 
     const  potraitBlocks = [1,2,3,4,5,6,7,8,9].map(digit=>{
         return (<span key={digit}  style={{backgroundColor:potraitBgColor,width:"100%",height:"100%"}}></span>)
@@ -44,9 +41,29 @@ const CategoryProducts = (props) => {
         }
     }
 
-    const productList = products.map((product,productIndex)=>{
-        return <ProductCardLayout key={product.id} propsObject={{isPortrait,product,rowHeight,productIndex,products,columnCount}} />   
-    });
+    const list = (()=>{
+        const parentList = [];
+        for (let index = 1; index <= columnCount; index++){
+            parentList.push(index)
+        }
+        return parentList.map((parentDiv,index)=>{
+            let _products=  products.filter((product,productIndex)=>{
+                const isChild = ((productIndex + 1)%columnCount) === ((index+1)%columnCount);
+                return isPortrait? isChild : true;
+            })
+            _products = _products.map((product,productIndex)=>{
+               return <ProductCardWrapper key={product.id} propsObject={{isPortrait,product}} />   
+            })
+
+            return (
+                <div key={index} style={{display:"flex",flexDirection:"column",gap:"20px",marginBottom:"20px"}}>
+                    {
+                        _products
+                    }
+                </div>
+            )
+        })
+    })();
     
   return (
     <div style={{paddingTop:"50px", flexGrow:"1"}}>
@@ -57,9 +74,9 @@ const CategoryProducts = (props) => {
                  <ProductSorter setSortProductsBy={setSortProductsBy} sortProductBy={_sortProductsBy}/>
              </div>
         </div>
-        <div className={`productGallery ${isPortrait?"" : "productGalleryLandScape"}`} ref={productGalleryRef} style={{gridTemplateColumns,gridAutoRows:`${rowHeight}px`}}>
+        <div  className="productGallery" style={{gridTemplateColumns}}>
             {
-                productList
+                list
             }
         </div>
     </div>

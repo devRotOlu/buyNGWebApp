@@ -24,7 +24,7 @@
 }
 
 .home{
-    background-color:  rgb(245, 245, 250);;
+    background-color:  rgb(245, 245, 250);
 }
 
 .searchBarWrapper{
@@ -32,9 +32,10 @@
     background-color: rgb(11, 206, 11);
     display: flex;
     align-items: center;
+    
 }
 
-.searchBarWrapper.componentWrappers{
+.searchBarWrapper.pageWrappers{
     padding-right: 0;
 }
 

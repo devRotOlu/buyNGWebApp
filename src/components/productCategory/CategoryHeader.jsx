@@ -2,11 +2,11 @@ import React from 'react'
 
 const CategoryHeader = ({length,name}) => {
   return (
-    <div className="categoryLabelWrapper small">
-        <div className="categoryLabel">
-            <span> BuyNG </span>
+    <div className="categoryHeaderWrapper small">
+        <div className="categoryHeader">
+            <span className="headerCategory"> BuyNG </span>
             <span style={{color:"grey"}}>/</span>
-            <span>
+            <span className="headerLabel">
                 {length} results for {name} in Nigeria
             </span>
         </div>

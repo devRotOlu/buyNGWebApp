@@ -15,7 +15,7 @@ const Navbar = () => {
   }
 
   return (    
-  <nav className="navbar navbar-expand-lg componentWrappers">
+  <nav className="navbar navbar-expand-lg pageWrappers">
     <div className="navbarWrapper w-100 d-lg-flex">
       <div className="d-flex justify-content-between" style={{minWidth:"fit-content"}}>
         <NavLink to="/" style={StyleLogo}>

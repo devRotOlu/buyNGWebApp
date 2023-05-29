@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useRef} from 'react';
+import React,{useState} from 'react';
 import { useLocation } from 'react-router-dom';
 
 import CategoryProducts from './categoryProducts/CategoryProducts';
@@ -51,8 +51,7 @@ const ViewCategory = () => {
         </div>
         <CategoryProducts propsObject={{name,products:_categroryProducts,setSortProductsBy,sortProductsBy}}/>
       </div>
-      <OffCanvas alignItems="center" justifyContent="center" bodyWidth="70%"
-    bodyHeight="80%">
+      <OffCanvas alignItems="center" justifyContent="center" bodyStyles={{width:"70%",height:"80%"}}>
         <CategoryLocations propsObject={{selectedLocation,selectedState,setSelectedState,setSelectedLocation}}/>
       </OffCanvas>
     </div>

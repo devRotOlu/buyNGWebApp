@@ -26,9 +26,9 @@ const Home = () => {
   const handleSearch = (event)=> setSearchTerm(event.target.value);
 
   return (
-    <div className="home ">
+    <div className="home">
     
-      <div className="searchBarWrapper componentWrappers">
+      <div className="searchBarWrapper pageWrappers">
         <div style={{minWidth:"30%"}}>
             <img src={avatar2} style={{width:"100%"}}/>
         </div>
@@ -49,7 +49,7 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="componentWrappers produtsContainer">
+      <div className="produtsContainer pageWrappers">
 
         <ul className="categoriesWrapper">
           {

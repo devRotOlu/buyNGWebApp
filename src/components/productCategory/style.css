@@ -1,15 +1,20 @@
 
-.categoryLabelWrapper{
+.categoryHeaderWrapper{
     height: 50px;
     display: flex;
     align-items: center;
 }
 
-.categoryLabel{
+.categoryHeader{
     height: fit-content;
     display: grid;
     grid-template-columns: repeat(3,max-content);
     column-gap: 10px;
+    width: fit-content;
+}
+
+.categoryHeader.productHeader{
+    grid-template-columns: repeat(5,max-content);
 }
 
 .categoryWrapper{
@@ -17,20 +22,21 @@
     background-color:  rgb(245, 245, 250);
     display: flex;
     gap:1.5rem ;
+    min-height: 100vh;
 }
 
-.categoryLabel{
-    width: fit-content;
+.categoryWrapper.productMainWrapper{
+    display: block;
 }
 
-.categoryLabel span:first-child{
+.headerCategory{
     border-radius:20px;
     color:grey;
     background-color:white;
     padding:0 0.5rem;
 }
 
-.categoryLabel span:last-child{
+.headerLabel{
     border-radius:20px; 
     color:rgb(129, 129, 161);
     background-color:white;

@@ -17,8 +17,8 @@ import AddProduct from "./product/addProduct/AddProduct";
 import AboutProduct from './product/addProduct/AboutProduct';
 import ProductDetails from './product/addProduct/ProductDetails';
 import ViewCategory from './productCategory/ViewCategory';
+import ProductDisplay from './productCategory/ProductDisplay';
 
-//import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/js/bootstrap.min.js'
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import "../scss/app.css";
@@ -53,6 +53,7 @@ const App = () => {
                 <Route path="about-product" element={<AboutProduct/>}/>
           </Route>
         </Route>
+        <Route path=":category/:product" element={<ProductDisplay/>}/>
         <Route path=":category" element={<ViewCategory/>}/>
       </Routes>
     </ContextWrapper>

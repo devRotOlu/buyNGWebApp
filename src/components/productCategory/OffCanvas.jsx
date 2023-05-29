@@ -6,7 +6,7 @@ const OffCanvas = (props) => {
 
   const {
           alignItems,justifyContent,
-          bodyWidth,bodyHeight
+          bodyStyles
         } = props;
 
   const appSates = useContext(appContext);
@@ -24,7 +24,7 @@ const OffCanvas = (props) => {
 
   return (
     <div onClick={handleCanvasClick} aria-checked="false" role="checkbox" className="canvas" id="canvas" style={{alignItems,justifyContent}}>
-       <div onClick={handleClick} tabIndex="0" style={{height:bodyHeight,width:bodyWidth,display:"grid",gridTemplateColumns:"100%",gridTemplateRows:"100%"}}>
+       <div onClick={handleClick} tabIndex="0" style={{...bodyStyles,display:"grid",gridTemplateColumns:"100%",gridTemplateRows:"100%"}}>
           {
             (isCanvasInView)?
             props.children

@@ -4,10 +4,11 @@ const ProductCard = (props) => {
     const {
         cardStyleObject, imageStyleObject,
         imageClass, handleImageLoad,
-        imageUrls, name
+        imageUrls, name,
+        handleClick
     } = props.propsObject
   return (
-    <div style={cardStyleObject}>
+    <div onClick={handleClick} style={cardStyleObject}>
       <img className={imageClass} onLoad={handleImageLoad} src={imageUrls[0].url} alt={name} style={imageStyleObject}/>
       {
           props.children

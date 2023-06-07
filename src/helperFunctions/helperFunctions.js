@@ -86,3 +86,50 @@ export const commaSeparatePrice= (price)=>{
   return _price;
 }
 
+export const carouselPrevious=(activeImage,imageCount,slider,markerIndex=1)=>{
+  if (activeImage===markerIndex) {
+    autoNext(imageCount,markerIndex,imageCount)
+  }else{
+    slider.style.left=`-${activeImage - 2}00%`;
+  }
+}
+
+export const autoPrevious = (imageCount,markerIndex,minIndex,minImageIndex)=>{
+  const slider = document.getElementById("slider");
+  for (let index = markerIndex; index > minIndex; index--) {
+      if (index > minImageIndex) {
+          if (index < markerIndex) {
+            setTimeout(() =>carouselPrevious(index,imageCount,slider),300);
+          }else{
+            carouselPrevious(index,imageCount,slider);
+          }
+      }else{
+        setTimeout(() =>slider.style.left = "0",300);
+     }
+  }
+}
+
+export const autoNext = (imageCount,markerIndex,maxIndex)=>{
+  const slider = document.getElementById("slider");
+  for (let index = markerIndex; index < maxIndex; index++) {
+      if (index > markerIndex) {
+        setTimeout(() =>carouselNext(index,imageCount,slider,imageCount),300);
+      }else{
+        carouselNext(index,imageCount,slider,imageCount);
+     }
+  }
+}
+
+export const carouselNext=(activeImage,imageCount,slider,markerIndex)=>{
+  if (activeImage===markerIndex) {
+    autoPrevious(imageCount,markerIndex,0)
+  }else{
+    slider.style.left=`-${activeImage}00%`;
+  }
+}
+
+export const imageSlider = (activeImage,imageCount,markerIndex,sliderFunction,minImageIndex)=>{
+  const slider = document.getElementById("slider");
+  sliderFunction(activeImage,imageCount,slider,markerIndex,minImageIndex)
+}
+

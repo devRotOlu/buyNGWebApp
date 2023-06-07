@@ -1,32 +1,29 @@
-import React,{useState} from 'react';
+import React from 'react';
+
+import CarouselItem from "./CarouselItem"
 
 const Carousel = (props) => {
 
     const {
             images,imageStyles,
-            displayImageIndex,
+            activeImage,
             carouselStyles,
             handleClick
         } = props.propsObject;
 
     const imageList = images.map((image,index)=>{
-
-        const isActive = (index + 1) === displayImageIndex;
-        return (
-            <div key={index} className={`carousel-item ${isActive?"active":""}`}>
-                {
-                    image
-                }
-            </div>
-        )
+        return <CarouselItem key={index + 1} propsObject={{image,index,activeImage}}/>
     })
 
+
   return (
-    <div onClick={handleClick} id="appCarousel" className="carousel slide" style={{position:"relative",...carouselStyles}}>
-        <div className="carousel-inner" style={{marginRight:"auto",marginLeft:"auto",...imageStyles}}>
-            {
+    <div onClick={handleClick} id="appCarousel" className="carouselSlide bg-danger" style={{position:"relative",...carouselStyles,overflow:"hidden"}}>
+        <div id="carouselInner" className="carouselInner" style={{...imageStyles}}>
+            <div id="slider" style={{height:"100%"}}>
+                {
                 imageList
-            }
+                }
+            </div>
         </div>
         {
             props.children
@@ -35,4 +32,4 @@ const Carousel = (props) => {
   )
 }
 
-export default Carousel
+export default Carousel;

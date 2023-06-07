@@ -48,6 +48,8 @@ const ContextWrapper = (props) => {
 
     const [isCanvasInView,setIsCanvasInView] = useState(false);
 
+    const [screenSize,setScreenSize] = useState(window.innerWidth);
+
     const authenticateUser = (data)=>{
       if (data) {
         const {email,phoneNumber,firstName,lastName,id} = data
@@ -75,6 +77,19 @@ const ContextWrapper = (props) => {
       }
       setCookie("userDetails",JSON.stringify({...currentCookie,...cookieObject}),{path:"/"})
     }
+
+    useEffect(()=>{
+     //var intervalId;
+     (()=>{
+       setInterval(() => {
+         const _screenSize = window.innerWidth;
+         if (_screenSize !== screenSize) {
+           setScreenSize(_screenSize);
+         }
+       },200);
+     })();
+     //return clearInterval(intervalId);
+    },[])
 
     useEffect(()=>{
       const userInfo = cookie.userDetails;
@@ -142,7 +157,7 @@ const ContextWrapper = (props) => {
     const displayEditButton = disableEmail?"block":"none";
     
   return (
-    <appContext.Provider value={{isSignedIn,userDetails,setUserDetails,disableEmail,setDisableEmail, setIsSignedIn, displayEditButton, styleValidationForm,cookie,setCookie,removeCokie,addUserInfoToCookie, productCategory,setProductCategory,productObject, setProductObject,states,regions, selectedCategory, setSelectedCategory,moveCanvasOffView,isCanvasInView,setIsCanvasInView}}>
+    <appContext.Provider value={{isSignedIn,userDetails,setUserDetails,disableEmail,setDisableEmail, setIsSignedIn, displayEditButton, styleValidationForm,cookie,setCookie,removeCokie,addUserInfoToCookie, productCategory,setProductCategory,productObject, setProductObject,states,regions, selectedCategory, setSelectedCategory,moveCanvasOffView,isCanvasInView,setIsCanvasInView,screenSize}}>
       {props.children}
     </appContext.Provider>
   )
